@@ -1,14 +1,13 @@
 import "@/styles/globals.css";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
 import { Metadata, Viewport } from "next";
 
 import { Providers } from "./providers";
 
+import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
-import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
     title: {
@@ -43,7 +42,11 @@ export default function RootLayout({
                 )}
             >
                 <Providers
-                    themeProps={{ attribute: "class", defaultTheme: "dark" }}
+                    themeProps={{
+                        attribute: "class",
+                        defaultTheme: "system",
+                        enableSystem: true,
+                    }}
                 >
                     <div className="relative flex flex-col h-screen">
                         <Navbar />

@@ -40,6 +40,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
 
     return (
         <Component
+            suppressHydrationWarning
             {...getBaseProps({
                 className: clsx(
                     "px-px transition-opacity hover:opacity-80 cursor-pointer",
