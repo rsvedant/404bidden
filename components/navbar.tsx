@@ -1,165 +1,126 @@
-import {
-    Navbar as HeroUINavbar,
-    NavbarContent,
-    NavbarMenu,
-    NavbarMenuToggle,
-    NavbarBrand,
-    NavbarItem,
-    NavbarMenuItem,
-} from "@heroui/navbar";
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
+"use client"
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
-import {
-    TwitterIcon,
-    GithubIcon,
-    DiscordIcon,
-    HeartFilledIcon,
-    SearchIcon,
-    Logo,
-} from "@/components/icons";
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { useTheme } from "next-themes"
+import { Sun, Moon } from "lucide-react"
+import { motion } from "framer-motion"
 
-export const Navbar = () => {
-    const searchInput = (
-        <Input
-            aria-label="Search"
-            classNames={{
-                inputWrapper: "bg-default-100",
-                input: "text-sm",
-            }}
-            endContent={
-                <Kbd className="hidden lg:inline-block" keys={["command"]}>
-                    K
-                </Kbd>
-            }
-            labelPlacement="outside"
-            placeholder="Search..."
-            startContent={
-                <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            type="search"
-        />
-    );
+export function Navbar() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
+    const { theme, setTheme } = useTheme()
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10)
+        }
+
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
 
     return (
-        <HeroUINavbar maxWidth="xl" position="sticky">
-            <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-                <NavbarBrand as="li" className="gap-3 max-w-fit">
-                    <NextLink
-                        className="flex justify-start items-center gap-1"
-                        href="/"
-                    >
-                        <Logo />
-                        <p className="font-bold text-inherit">ACME</p>
-                    </NextLink>
-                </NavbarBrand>
-                <ul className="hidden lg:flex gap-4 justify-start ml-2">
-                    {siteConfig.navItems.map((item) => (
-                        <NavbarItem key={item.href}>
-                            <NextLink
-                                className={clsx(
-                                    linkStyles({ color: "foreground" }),
-                                    "data-[active=true]:text-primary data-[active=true]:font-medium",
-                                )}
-                                color="foreground"
-                                href={item.href}
-                            >
-                                {item.label}
-                            </NextLink>
-                        </NavbarItem>
-                    ))}
-                </ul>
-            </NavbarContent>
-
-            <NavbarContent
-                className="hidden sm:flex basis-1/5 sm:basis-full"
-                justify="end"
-            >
-                <NavbarItem className="hidden sm:flex gap-2">
-                    <Link
-                        isExternal
-                        aria-label="Twitter"
-                        href={siteConfig.links.twitter}
-                    >
-                        <TwitterIcon className="text-default-500" />
-                    </Link>
-                    <Link
-                        isExternal
-                        aria-label="Discord"
-                        href={siteConfig.links.discord}
-                    >
-                        <DiscordIcon className="text-default-500" />
-                    </Link>
-                    <Link
-                        isExternal
-                        aria-label="Github"
-                        href={siteConfig.links.github}
-                    >
-                        <GithubIcon className="text-default-500" />
-                    </Link>
-                    <ThemeSwitch />
-                </NavbarItem>
-                <NavbarItem className="hidden lg:flex">
-                    {searchInput}
-                </NavbarItem>
-                <NavbarItem className="hidden md:flex">
-                    <Button
-                        isExternal
-                        as={Link}
-                        className="text-sm font-normal text-default-600 bg-default-100"
-                        href={siteConfig.links.sponsor}
-                        startContent={
-                            <HeartFilledIcon className="text-danger" />
-                        }
-                        variant="flat"
-                    >
-                        Sponsor
-                    </Button>
-                </NavbarItem>
-            </NavbarContent>
-
-            <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-                <Link
-                    isExternal
-                    aria-label="Github"
-                    href={siteConfig.links.github}
-                >
-                    <GithubIcon className="text-default-500" />
+        <motion.nav
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "border-b shadow-sm backdrop-blur-md" : ""
+                }`}
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <div className="container flex items-center justify-between h-16 px-4 mx-auto md:px-6">
+                <Link href="/" className="text-xl font-bold">
+                    Minimal<span className="text-primary">Project</span>
                 </Link>
-                <ThemeSwitch />
-                <NavbarMenuToggle />
-            </NavbarContent>
 
-            <NavbarMenu>
-                {searchInput}
-                <div className="mx-4 mt-2 flex flex-col gap-2">
-                    {siteConfig.navMenuItems.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`}>
-                            <Link
-                                color={
-                                    index === 2
-                                        ? "primary"
-                                        : index ===
-                                            siteConfig.navMenuItems.length - 1
-                                          ? "danger"
-                                          : "foreground"
-                                }
-                                href="#"
-                                size="lg"
-                            >
-                                {item.label}
-                            </Link>
-                        </NavbarMenuItem>
-                    ))}
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex md:items-center md:gap-6">
+                    <Link href="#features" className="text-sm hover:text-primary transition-colors">
+                        Features
+                    </Link>
+                    <Link href="#testimonials" className="text-sm hover:text-primary transition-colors">
+                        Testimonials
+                    </Link>
+                    <Link href="#pricing" className="text-sm hover:text-primary transition-colors">
+                        Pricing
+                    </Link>
+                    <Link href="#contact" className="text-sm hover:text-primary transition-colors">
+                        Contact
+                    </Link>
+
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        aria-label="Toggle theme"
+                    >
+                        {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                    </Button>
+
+                    <Button>Get Started</Button>
                 </div>
-            </NavbarMenu>
-        </HeroUINavbar>
-    );
-};
+
+                {/* Mobile Navigation Toggle */}
+                <div className="flex items-center gap-4 md:hidden">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        aria-label="Toggle theme"
+                    >
+                        {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                    </Button>
+
+                    <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                    </Button>
+                </div>
+            </div>
+
+            {/* Mobile Navigation Menu */}
+            {isOpen && (
+                <motion.div
+                    className="md:hidden border-t"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    <div className="container flex flex-col space-y-4 py-4 px-4">
+                        <Link
+                            href="#features"
+                            className="py-2 hover:text-primary transition-colors"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Features
+                        </Link>
+                        <Link
+                            href="#testimonials"
+                            className="py-2 hover:text-primary transition-colors"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Testimonials
+                        </Link>
+                        <Link
+                            href="#pricing"
+                            className="py-2 hover:text-primary transition-colors"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Pricing
+                        </Link>
+                        <Link
+                            href="#contact"
+                            className="py-2 hover:text-primary transition-colors"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Contact
+                        </Link>
+                        <Button className="w-full">Get Started</Button>
+                    </div>
+                </motion.div>
+            )}
+        </motion.nav>
+    )
+}

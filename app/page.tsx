@@ -6,12 +6,11 @@ import { TestimonialsSection } from "@/components/landing/testimonials-section";
 
 export default function LandingPage() {
     return (
-        <div>
+        <div className="flex flex-col items-center w-full">
             <HeroSection />
             <FeaturesSection />
             <TestimonialsSection />
             <CtaSection />
-            {/* <Footer /> */}
         </div>
     );
 }

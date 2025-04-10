@@ -1,189 +1,114 @@
-import Link from "next/link";
-import { Github, Twitter, Linkedin } from "lucide-react";
+import Link from "next/link"
+import { Github, Twitter, Linkedin, Instagram } from "lucide-react"
 
 export function Footer() {
     return (
-        <footer className="py-12 md:py-16 bg-zinc-900">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <Link
-                            href="/"
-                            className="text-xl font-bold tracking-tighter"
-                        >
-                            Minimal
+        <footer className="border-t py-12 md:py-16 flex flex-col items-center justify-center">
+            <div className="container px-4 md:px-6">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+                    <div className="space-y-4">
+                        <Link href="/" className="text-xl font-bold">
+                            Minimal<span className="text-primary">Project</span>
                         </Link>
-                        <p className="mt-4 text-gray-600">
-                            Comprehensive application monitoring for modern
-                            development teams.
+                        <p className="text-sm text-muted-foreground">
+                            Simplifying complexity through elegant design and powerful functionality.
                         </p>
-                        <div className="flex space-x-4 mt-6">
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500 transition-colors"
-                            >
-                                <span className="sr-only">Twitter</span>
-                                <Twitter size={20} />
-                            </Link>
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500 transition-colors"
-                            >
-                                <span className="sr-only">GitHub</span>
-                                <Github size={20} />
-                            </Link>
-                            <Link
-                                href="#"
-                                className="text-gray-400 hover:text-gray-500 transition-colors"
-                            >
-                                <span className="sr-only">LinkedIn</span>
-                                <Linkedin size={20} />
-                            </Link>
-                        </div>
                     </div>
-
-                    <div>
-                        <h3 className="font-semibold mb-4">Product</h3>
-                        <ul className="space-y-2">
+                    <div className="space-y-4">
+                        <h4 className="text-sm font-medium">Product</h4>
+                        <ul className="space-y-2 text-sm">
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Features
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Pricing
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
-                                    Integrations
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Changelog
                                 </Link>
                             </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-semibold mb-4">Resources</h3>
-                        <ul className="space-y-2">
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Documentation
                                 </Link>
                             </li>
-                            <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
-                                    API Reference
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
-                                    Blog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
-                                    Community
-                                </Link>
-                            </li>
                         </ul>
                     </div>
-
-                    <div>
-                        <h3 className="font-semibold mb-4">Company</h3>
-                        <ul className="space-y-2">
+                    <div className="space-y-4">
+                        <h4 className="text-sm font-medium">Company</h4>
+                        <ul className="space-y-2 text-sm">
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                                     About
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Blog
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Careers
                                 </Link>
                             </li>
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
+                                <Link href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
                                     Contact
                                 </Link>
                             </li>
+                        </ul>
+                    </div>
+                    <div className="space-y-4">
+                        <h4 className="text-sm font-medium">Legal</h4>
+                        <ul className="space-y-2 text-sm">
                             <li>
-                                <Link
-                                    href="#"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors"
-                                >
-                                    Legal
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Privacy Policy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Terms of Service
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    Cookie Policy
                                 </Link>
                             </li>
                         </ul>
                     </div>
                 </div>
-
-                <div className="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-gray-500 text-sm">
-                        © {new Date().getFullYear()} Minimal. All rights
-                        reserved.
+                <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
+                    <p className="text-sm text-muted-foreground">
+                        © {new Date().getFullYear()} MinimalProject. All rights reserved.
                     </p>
-                    <div className="mt-4 md:mt-0 flex space-x-6">
-                        <Link
-                            href="#"
-                            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-                        >
-                            Privacy Policy
+                    <div className="flex items-center gap-4">
+                        <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                            <Github className="h-5 w-5" />
+                            <span className="sr-only">GitHub</span>
                         </Link>
-                        <Link
-                            href="#"
-                            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-                        >
-                            Terms of Service
+                        <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                            <Twitter className="h-5 w-5" />
+                            <span className="sr-only">Twitter</span>
                         </Link>
-                        <Link
-                            href="#"
-                            className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-                        >
-                            Cookie Policy
+                        <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                            <Linkedin className="h-5 w-5" />
+                            <span className="sr-only">LinkedIn</span>
+                        </Link>
+                        <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                            <Instagram className="h-5 w-5" />
+                            <span className="sr-only">Instagram</span>
                         </Link>
                     </div>
                 </div>
             </div>
         </footer>
-    );
+    )
 }
