@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Used for direct connections when working with Neon serverless driver
+}
+
+// Define your models below
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  endpoints Endpoint[]
+}
+
+model Endpoint {
+  id           String   @id @default(uuid())
+  url          String
+  name         String
+  description  String?
+  interval     Int      @default(5) // Check interval in minutes
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  checkResults CheckResult[]
+}
+
+model CheckResult {
+  id         String   @id @default(uuid())
+  statusCode Int?
+  responseTime Int?    // Response time in milliseconds
+  isUp       Boolean
+  createdAt  DateTime @default(now())
+  endpointId String
+  endpoint   Endpoint @relation(fields: [endpointId], references: [id])
+}
